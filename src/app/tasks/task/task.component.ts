@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskInterface } from '../../models/task.interface';
 
 @Component({
@@ -10,4 +10,9 @@ import { TaskInterface } from '../../models/task.interface';
 })
 export class TaskComponent {
   @Input({ required: true }) task!: TaskInterface;
+  @Output() complete = new EventEmitter<string>();
+
+  onCompleteTask() {
+    this.complete.emit(this.task.id);
+  }
 }

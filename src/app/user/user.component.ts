@@ -10,6 +10,7 @@ import type { UserInterface } from '../models/user.interface';
 })
 export class UserComponent {
   @Input() user?: UserInterface;
+  @Input({ required: true }) selected!: boolean;
   @Output() select = new EventEmitter<UserInterface>();
 
   get imagePath() {

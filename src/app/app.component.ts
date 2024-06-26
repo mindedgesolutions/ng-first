@@ -15,9 +15,9 @@ import { UserInterface } from './models/user.interface';
 })
 export class AppComponent {
   users = DUMMY_USERS;
-  user = <UserInterface>{};
+  userInfo = <UserInterface>{};
 
   onSelectUser(user: UserInterface) {
-    this.user = user;
+    this.userInfo = user;
   }
 }
