@@ -4,6 +4,7 @@ import { TaskComponent } from './task/task.component';
 import { DUMMY_TASKS } from '../utils/dummyTasks';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { AddTaskInterface } from '../models/task.interface';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -17,12 +18,14 @@ export class TasksComponent {
   tasks = DUMMY_TASKS;
   show = false;
 
+  constructor(private taskService: TaskService) {}
+
   get selectedUserTasks() {
-    return this.tasks.filter((i) => i.userId === this.user.id);
+    return this.taskService.getUserTasks(this.user.id);
   }
 
   completeTask(id: string) {
-    this.tasks = this.tasks.filter((i) => i.id !== id);
+    return this.taskService.removeTask(id);
   }
 
   showForm() {
@@ -31,17 +34,5 @@ export class TasksComponent {
 
   hideForm() {
     this.show = false;
-  }
-
-  saveNewTask(newTask: AddTaskInterface) {
-    let task = {
-      id: Date.now().toString(),
-      userId: this.user.id,
-      title: newTask.title,
-      summary: newTask.summary,
-      dueDate: newTask.dueDate,
-    };
-    this.show = false;
-    this.tasks.push(task);
   }
 }

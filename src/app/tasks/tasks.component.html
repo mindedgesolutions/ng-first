@@ -7,7 +7,7 @@
   </header>
 
   @if (show) {
-  <app-new-task (cancel)="hideForm()" (add)="saveNewTask($event)" />
+  <app-new-task (cancel)="hideForm()" [userId]="user.id" />
   }
 
   <ul>
